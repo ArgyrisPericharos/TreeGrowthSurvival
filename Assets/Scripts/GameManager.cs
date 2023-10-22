@@ -61,8 +61,9 @@ public class GameManager : MonoBehaviour
     public bool CheckToChangeCutsToTrees, CheckingList;
 
     public float internaltimer;
+    public float yourtime;
 
-    public Text InternalTimerText, TickRateText;
+    public Text InternalTimerText, TickRateText, YourTimeText;
     private void Awake()
     {
         dataFromTiles = new Dictionary<TileBase, TileData>();
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
         MainTickRateStates = 0;
 
         WastelandsAvailable = 1f;
-        TreeCutttingAvailable = 5f;
+        TreeCutttingAvailable = 3f;
         SelecttedCityAvailable = 0f;
 
         internaltimer = 16f;
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour
         CheckToChangeCutsToTrees = false;
         CheckingList = false;
 
+        yourtime = 0;
+
         PlacingTheCentreTiles();
         PlacingCityTile();
         PlacingWastelandTiles();
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour
    
     void Update()
     {
+        yourtime += Time.deltaTime;
 
         if (MainTickRateStates == 0)
         {
@@ -182,6 +186,7 @@ public class GameManager : MonoBehaviour
         NumberOfTreeEarnings.text = TreeEarnings.ToString();
         InternalTimerText.text = internaltimer.ToString("F0");
         TickRateText.text = MainTickRate.ToString("F0");
+        YourTimeText.text = yourtime.ToString("F0");
 
 
         if (SelectedTreeCutting == true && SelectedWasteland == false && SelectedCity == false && TreeCutttingAvailable >= 1)
@@ -193,7 +198,7 @@ public class GameManager : MonoBehaviour
 
                 TileBase clickedTile = map.GetTile(gridPosition);
 
-                if (dataFromTiles[clickedTile].Tree == true || dataFromTiles[clickedTile].TreeGrowthOne == true)
+                if (dataFromTiles[clickedTile].Tree == true)
                 {
                     map.SetTile(gridPosition, TreeCut);
                     TreeCutttingAvailable -= 1f;
@@ -201,10 +206,10 @@ public class GameManager : MonoBehaviour
 
                     TreeCutees.Add(gridPosition);
 
-                    if (GrowthCentres.Contains(gridPosition))
+                    /*if (GrowthCentres.Contains(gridPosition))
                     {
                         GrowthCentres.Remove(gridPosition);
-                    }
+                    } */
                 }
                 else
                 {
@@ -280,25 +285,25 @@ public class GameManager : MonoBehaviour
 
     public void PlacingWastelandTiles()
     {
-        randomxyz3 = new Vector3Int(Random.Range(-1, 0), Random.Range(-4, 3), 0);
+        randomxyz3 = new Vector3Int(Random.Range(-1, 1), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz3, Wasteland);
 
-        randomxyz4 = new Vector3Int(Random.Range(-1, 0), Random.Range(-4, 3), 0);
+        randomxyz4 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz4, Wasteland);
 
-        randomxyz5 = new Vector3Int(Random.Range(-1, 0), Random.Range(-4, 3), 0);
+        randomxyz5 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz5, Wasteland);
 
-        randomxyz6 = new Vector3Int(Random.Range(-1, 0), Random.Range(-4, 3), 0);
+        randomxyz6 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz6, Wasteland);
 
-        randomxyz7 = new Vector3Int(Random.Range(-1, 0), Random.Range(-4, 3), 0);
+        randomxyz7 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz7, Wasteland);
     }
 
     public void PlacingTheCentreTiles()
     {
-        randomxyz = new Vector3Int(Random.Range(-9, -2), Random.Range(-4, 3), 0);
+        randomxyz = new Vector3Int(Random.Range(-9, -3), Random.Range(-4, 3), 0);
 
         map.SetTile(randomxyz, TreeCentre);
 
@@ -313,7 +318,7 @@ public class GameManager : MonoBehaviour
 
     public void PlacingCityTile()
     {
-        randomxyz2 = new Vector3Int(Random.Range(1, 8), Random.Range(-4, 3), 0);
+        randomxyz2 = new Vector3Int(Random.Range(3, 8), Random.Range(-4, 3), 0);
 
         map.SetTile(randomxyz2, City);
 
@@ -425,11 +430,11 @@ public class GameManager : MonoBehaviour
         if (Earnings >= 26)
         {
             
-            TreeCutttingAvailable += 2f;
+            TreeCutttingAvailable += Random.Range(1, 4);
         }
         else if (Earnings <= 25)
         {
-            WastelandsAvailable += 1f;
+            WastelandsAvailable += 1;
             
         }
 
