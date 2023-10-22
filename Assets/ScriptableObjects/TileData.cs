@@ -14,4 +14,5 @@ public class TileData : ScriptableObject
     public bool TreeGrowthOne, TreeGrowthTwo, TreeGrowthThree;
     public bool BarrenWasteland;
     public bool City;
+    public bool TreeCut;
 }
