@@ -79,14 +79,14 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        MainTickRate = 10;
+        MainTickRate = 5;
         MainTickRateStates = 0;
 
         WastelandsAvailable = 1f;
         TreeCutttingAvailable = 3f;
         SelecttedCityAvailable = 0f;
 
-        internaltimer = 16f;
+        internaltimer = 11f;
 
         SelectedWasteland = false;
         SelectedTreeCutting = false;
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         if (MainTickRateStates == 1)
         {
 
-            MainTickRate = 10;
+            MainTickRate = 5;
 
             MainTickRateStates = 0;
 
@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
 
         if (CheckToChangeCutsToTrees == true && CheckingList == true)
         {
-            internaltimer = 21f;
+            internaltimer = 11f;
             RunListChangeProgramForCuts();
             
         }
@@ -297,8 +297,8 @@ public class GameManager : MonoBehaviour
         randomxyz6 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
         map.SetTile(randomxyz6, Wasteland);
 
-        randomxyz7 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
-        map.SetTile(randomxyz7, Wasteland);
+        //randomxyz7 = new Vector3Int(Random.Range(-2, 2), Random.Range(-4, 3), 0);
+       // map.SetTile(randomxyz7, Wasteland);
     }
 
     public void PlacingTheCentreTiles()
