@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour
 
                 TileBase clickedTile = map.GetTile(gridPosition);
 
-                if (dataFromTiles[clickedTile].Tree == true || dataFromTiles[clickedTile].TreeGrowthOne == true)
+                if (dataFromTiles[clickedTile].Tree == true)
                 {
                     map.SetTile(gridPosition, Wasteland);
                     WastelandsAvailable -= 1f;
